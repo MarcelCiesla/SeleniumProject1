@@ -18,7 +18,8 @@ public class HotelSearch {
         driver.findElement(By.xpath("//span[text()='Search by Hotel or City Name']")).click();
         driver.findElement(By.xpath("//*[@id=\"select2-drop\"]/div/input")).sendKeys("Dubai");
         driver.findElement(By.xpath("//span[@class='select2-match' and text()='Dubai']")).click();
-
+        driver.findElement(By.name("checkin")).sendKeys("02/11/2022");
+        driver.findElement(By.name("checkout")).sendKeys("05/11/2022");
 
     }
 }
