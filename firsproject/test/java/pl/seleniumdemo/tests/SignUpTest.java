@@ -1,16 +1,12 @@
-import io.github.bonigarcia.wdm.WebDriverManager;
+package pl.seleniumdemo.tests;
+
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pl.seleniumdemo.tests.BaseTest;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
-
-public class SignUpTest extends BaseTest{
+public class SignUpTest extends BaseTest {
 
     @Test
     public void signUp()  {
