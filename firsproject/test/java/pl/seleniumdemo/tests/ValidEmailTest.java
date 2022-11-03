@@ -4,6 +4,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pl.seleniumdemo.pages.HotelSearchPage;
+import pl.seleniumdemo.pages.LoggedUserPage;
+import pl.seleniumdemo.pages.SignUpPage;
 import pl.seleniumdemo.tests.BaseTest;
 
 import java.util.List;
@@ -14,7 +17,23 @@ public class ValidEmailTest extends BaseTest {
     @Test
     public void email() {
 
-        driver.findElements(By.xpath("//li[@id='li_myaccount']")).stream().filter(WebElement::isDisplayed).findFirst().ifPresent(WebElement::click);
+        /*HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
+        hotelSearchPage.openSignUpForm();*/
+
+        SignUpPage signUpPage = new HotelSearchPage(driver)
+                .openSignUpForm()
+                .setFirstName("Marcel")
+                .setLastName("Cieslozord")
+                .setPhone("666222111")
+                .setEmail("email")
+                .setPassword("lelele")
+                .setConfirmPassword("lelele");
+        signUpPage.clickSignUp();
+
+        Assert.assertTrue(signUpPage.getErrors().contains("The Email field must contain a valid email address."));
+
+
+        /*driver.findElements(By.xpath("//li[@id='li_myaccount']")).stream().filter(WebElement::isDisplayed).findFirst().ifPresent(WebElement::click);
         driver.findElements(By.xpath("//a[text()='  Sign Up']")).get(1).click();
 
         driver.findElement(By.name("firstname")).sendKeys("Marcel");
@@ -28,8 +47,8 @@ public class ValidEmailTest extends BaseTest {
         List<String> errors = driver.findElements(By.xpath("//div[@class='alert alert-danger']//p")).stream()
                         .map(WebElement::getText)
                                 .collect(Collectors.toList());
-
-        Assert.assertTrue(errors.contains("The Email field must contain a valid email address."));
+*//*
+        Assert.assertTrue(errors.contains("The Email field must contain a valid email address."));*/
 
     }
 }

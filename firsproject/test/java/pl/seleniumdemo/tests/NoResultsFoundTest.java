@@ -13,10 +13,11 @@ public class NoResultsFoundTest extends BaseTest {
     @Test
     public void Noresultsfound() {
 
-        HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
-        hotelSearchPage.setDates("02/11/2022","05/11/2022");
-        hotelSearchPage.setTravellers(0,1);
-        hotelSearchPage.performSearch();
+        //HotelSearchPage hotelSearchPage = new HotelSearchPage(driver)
+        ResultsPage resultsPage = new HotelSearchPage(driver)
+                .setDates("02/11/2022", "05/11/2022")
+                .setTravellers(0, 1)
+                .performSearch();
 
 
         // tu bez PageObjectu
@@ -29,11 +30,10 @@ public class NoResultsFoundTest extends BaseTest {
         WebElement nofound = driver.findElement(By.xpath("//h2[text()= 'No Results Found']"));
         *//*Assert.assertEquals(nofound.getText(), "No Results Found");*/
 
-        ResultsPage resultsPage = new ResultsPage(driver);
+        //ResultsPage resultsPage = new ResultsPage(driver);
 
         Assert.assertTrue((resultsPage.resultHeading.isDisplayed()));
-        Assert.assertEquals(resultsPage.getHeadingText(),"No Results Found");
-
+        Assert.assertEquals(resultsPage.getHeadingText(), "No Results Found");
 
 
     }

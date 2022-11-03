@@ -1,9 +1,12 @@
 package pl.seleniumdemo.pages;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import java.util.List;
 
 
 public class HotelSearchPage {
@@ -32,57 +35,54 @@ public class HotelSearchPage {
     @FindBy(xpath = "//button[text()=' Search']")
     private WebElement searchButton;
 
+    @FindBy(xpath = "//li[@id='li_myaccount']")
+    private List<WebElement> myAccountLink;
+
+    @FindBy(xpath = "//a[text()='  Sign Up']")
+    private List<WebElement> signUpLink;
+
     private WebDriver driver;
 
     public HotelSearchPage(WebDriver driver) {
-        PageFactory.initElements(driver,this);
+        PageFactory.initElements(driver, this);
         this.driver = driver;
     }
 
-    public void setCity(String cityName) {
+    public HotelSearchPage setCity(String cityName) {
         searchHotelSpan.click();
         searchHotelInput.sendKeys(cityName);
-        String xpath = String.format("//span[@class='select2-match' and text()='%s']",cityName);
+        String xpath = String.format("//span[@class='select2-match' and text()='%s']", cityName);
         driver.findElement(By.xpath(xpath)).click();
+        return this;
     }
 
-    public void setDates(String checkIn, String checkOut) {
+    public HotelSearchPage setDates(String checkIn, String checkOut) {
         checkInInput.sendKeys(checkIn);
         checkOutInput.sendKeys(checkOut);
+        return this;
     }
 
-    public void setTravellers(int adultsToAdd, int childToAdd) {
+    public HotelSearchPage setTravellers(int adultsToAdd, int childToAdd) {
         travellersInput.click();
         addTraveler(adultPlusBtn, adultsToAdd);
         addTraveler(childPlusBtn, childToAdd);
+        return this;
     }
 
-    private void addTraveler (WebElement travelerBtn, int numberOfTravelers) {
-        for (int i=0; i< numberOfTravelers; i++) {
+    private void addTraveler(WebElement travelerBtn, int numberOfTravelers) {
+        for (int i = 0; i < numberOfTravelers; i++) {
             travelerBtn.click();
         }
     }
 
-    public void performSearch() {
+    public ResultsPage performSearch() {
         searchButton.click();
+        return new ResultsPage(driver);
     }
 
-    /* driver.findElement(By.xpath("//span[text()='Search by Hotel or City Name']")).click();
-        driver.findElement(By.xpath("//*[@id=\"select2-drop\"]/div/input")).sendKeys("Dubai");
-        driver.findElement(By.xpath("//span[@class='select2-match' and text()='Dubai']")).click();
-        driver.findElement(By.name("checkin")).sendKeys("02/11/2022");
-        driver.findElement(By.name("checkout")).sendKeys("05/11/2022");
-
-    //korzystanie z kalendarza
-        driver.findElement(By.name("checkin")).findElement(By.xpath("//td[@class='day ' and text()='30']")).click();
-        driver.findElement(By.name("checkout")).findElement(By.xpath("//td[@class='day ' and text()='30']")).click();
-
-        driver.findElement(By.id("travellersInput")).click();
-        driver.findElement(By.id("adultPlusBtn")).click();
-        driver.findElement(By.id("childPlusBtn")).click();
-
-        driver.findElement(By.xpath("//button[text()=' Search']")).click();
-
-    List<String> hotelNames = driver.findElements(By.xpath("//h4[contains(@class,'list_title')]//b")).stream()
-*/
+    public SignUpPage openSignUpForm() {
+        myAccountLink.stream().filter(WebElement::isDisplayed).findFirst().ifPresent(WebElement::click);
+        signUpLink.get(1).click();
+        return new SignUpPage(driver);
+    }
 }

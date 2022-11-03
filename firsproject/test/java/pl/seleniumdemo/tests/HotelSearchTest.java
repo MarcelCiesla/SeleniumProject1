@@ -1,23 +1,26 @@
 package pl.seleniumdemo.tests;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pl.seleniumdemo.pages.HotelSearchPage;
 import pl.seleniumdemo.pages.ResultsPage;
+
 import java.util.List;
 
 public class HotelSearchTest extends BaseTest {
 
     @Test
-    public void searchHotel()  {
+    public void searchHotel() {
 
         HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
-        hotelSearchPage.setCity("Dubai");
-        hotelSearchPage.setDates("03/11/2022", "23/11/2022");
-        hotelSearchPage.setTravellers(1,1);
-        hotelSearchPage.performSearch();
+        List<String> hotelNames = hotelSearchPage
+                .setCity("Dubai")
+                .setDates("03/11/2022", "23/11/2022")
+                .setTravellers(1, 1)
+                .performSearch().getHotelNames();
 
-        ResultsPage resultsPage = new ResultsPage(driver);
-        List<String> hotelNames = resultsPage.getHotelNames();
+        //ResultsPage resultsPage = new ResultsPage(driver);
+        // List<String> hotelNames = resultsPage.getHotelNames();
 
         // Tu przyklad bez PageObjectu
 
@@ -49,6 +52,7 @@ public class HotelSearchTest extends BaseTest {
         Assert.assertEquals("Oasis Beach Tower", hotelNames.get(1));
         Assert.assertEquals("Rose Rayhaan Rotana", hotelNames.get(2));
         Assert.assertEquals("Hyatt Regency Perth", hotelNames.get(3));
+
 
     }
 }

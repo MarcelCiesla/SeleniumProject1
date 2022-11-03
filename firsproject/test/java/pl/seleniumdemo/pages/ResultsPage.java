@@ -17,11 +17,11 @@ public class ResultsPage {
     public WebElement resultHeading;
 
     public ResultsPage(WebDriver driver) {
-        PageFactory.initElements(driver,this);
+        PageFactory.initElements(driver, this);
     }
 
     public List<String> getHotelNames() {
-        return  hotelList.stream()
+        return hotelList.stream()
                 .map(el -> el.getAttribute("textContent"))
                 .collect(Collectors.toList());
     }
