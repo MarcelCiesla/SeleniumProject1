@@ -7,6 +7,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class DriverFactory {
 
+
     public static WebDriver getDriver(String name) {
         if(name.equals("firefox")) {
             WebDriverManager.firefoxdriver().setup();

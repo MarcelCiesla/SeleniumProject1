@@ -1,12 +1,11 @@
-package pl.seleniumdemo.tests;
+package test.java.pl.seleniumdemo.tests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pl.seleniumdemo.pages.HotelSearchPage;
-import pl.seleniumdemo.pages.ResultsPage;
-import pl.seleniumdemo.tests.BaseTest;
+import test.java.pl.seleniumdemo.pages.HotelSearchPage;
+import test.java.pl.seleniumdemo.pages.ResultsPage;
 
 public class NoResultsFoundTest extends BaseTest {
 
