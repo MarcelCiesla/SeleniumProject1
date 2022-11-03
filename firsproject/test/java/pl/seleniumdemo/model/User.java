@@ -1,4 +1,4 @@
-package pl.seleniumdemo.model;
+package test.java.pl.seleniumdemo.model;
 
 public class User {
 

@@ -1,14 +1,9 @@
-package pl.seleniumdemo.tests;
+package test.java.pl.seleniumdemo.tests;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pl.seleniumdemo.model.User;
-import pl.seleniumdemo.pages.HotelSearchPage;
-import pl.seleniumdemo.pages.LoggedUserPage;
-import pl.seleniumdemo.pages.SignUpPage;
-import pl.seleniumdemo.tests.BaseTest;
+import test.java.pl.seleniumdemo.pages.HotelSearchPage;
+import test.java.pl.seleniumdemo.pages.LoggedUserPage;
 
 public class SignUpTest extends BaseTest {
 
