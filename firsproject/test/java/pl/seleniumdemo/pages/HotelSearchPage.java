@@ -1,4 +1,4 @@
-package pl.seleniumdemo.pages;
+package test.java.pl.seleniumdemo.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
