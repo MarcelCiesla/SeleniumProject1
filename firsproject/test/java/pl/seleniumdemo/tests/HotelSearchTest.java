@@ -1,21 +1,31 @@
 package test.java.pl.seleniumdemo.tests;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import test.java.pl.seleniumdemo.pages.HotelSearchPage;
 import test.java.pl.seleniumdemo.pages.ResultsPage;
+import test.java.utils.SeleniumHelper;
 
+import java.io.IOException;
 import java.util.List;
 
 public class HotelSearchTest extends BaseTest {
 
+    // test ze screenshotem i zapisywaniem w html
     @Test
-    public void searchHotel()  {
+    public void searchHotel() throws IOException {
+        ExtentTest test = extentReports.createTest("Search Hotel Test");
 
         HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
         hotelSearchPage.setCity("Dubai");
+        test.log(Status.PASS, "Setting city done", SeleniumHelper.getScreenshot(driver));
         hotelSearchPage.setDates("03/11/2022", "23/11/2022");
+        test.log(Status.PASS, "Setting dates done", SeleniumHelper.getScreenshot(driver));
         hotelSearchPage.setTravellers(1,1);
+        test.log(Status.PASS, "Setting travelers done", SeleniumHelper.getScreenshot(driver));
         hotelSearchPage.performSearch();
+        test.log(Status.PASS, "Performing search done", SeleniumHelper.getScreenshot(driver));
 
         ResultsPage resultsPage = new ResultsPage(driver);
         List<String> hotelNames = resultsPage.getHotelNames();
@@ -50,6 +60,8 @@ public class HotelSearchTest extends BaseTest {
         Assert.assertEquals("Oasis Beach Tower", hotelNames.get(1));
         Assert.assertEquals("Rose Rayhaan Rotana", hotelNames.get(2));
         Assert.assertEquals("Hyatt Regency Perth", hotelNames.get(3));
+
+        test.log(Status.PASS, "Assertions passed", SeleniumHelper.getScreenshot(driver));
 
     }
 }
